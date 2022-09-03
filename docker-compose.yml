@@ -1,0 +1,60 @@
+
+services:
+  mongo:
+    image: mongo
+    container_name: mongodb
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: admin
+    ports:
+      - "27017:27017"
+    volumes:
+      - /home/leandro/Desenvolvimento/TodoProject/Mongo:/var/lib/mongo/data
+    networks:
+      - todoProject-network
+      
+  mongo-express:
+    image: mongo-express
+    container_name: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: admin
+      ME_CONFIG_MONGODB_PORT: 27017
+      ME_CONFIG_MONGODB_SERVER: mongodb
+    depends_on:
+      - mongo
+    networks:
+      - todoProject-network
+      
+  postgres-compose:
+    image: postgres
+    container_name: postgres
+    environment:
+      POSTGRES_PASSWORD: "LeandroPostgres2021*"
+    ports:
+      - "15432:5432"
+    volumes:
+      - /home/leandro/Desenvolvimento/TodoProject/PostgreSQL:/var/lib/postgresql/data
+    networks:
+      - todoProject-network
+      
+  pgadmin-compose:
+    image: dpage/pgadmin4
+    container_name: pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "leandro.sdias@hotmail.com"
+      PGADMIN_DEFAULT_PASSWORD: "PgAdmin2022!"
+    ports:
+      - "16543:80"
+    depends_on:
+      - postgres-compose
+    networks:
+      - todoProject-network
+
+networks: 
+  todoProject-network:
+    driver: bridge
