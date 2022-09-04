@@ -5,7 +5,7 @@
         private readonly DataContext _context;
         private readonly ILogger _logger;
 
-        public UnitOfWork(DataContext context, ILogger logger)
+        public UnitOfWork(DataContext context, ILogger<UnitOfWork> logger)
         {
             _context = context;
             _logger = logger;

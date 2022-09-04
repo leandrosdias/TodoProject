@@ -9,10 +9,8 @@ namespace Todo.API.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public DateTime InsertedAt { get; set; }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime UpdatedAt { get; set; }
     }
 }
