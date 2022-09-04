@@ -1,6 +1,6 @@
 using Audit.API.Data.Configuration;
+using Audit.API.Data.Repositories;
 using Audit.API.Services;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
 // For instructions on how to configure Kestrel and gRPC clients on macOS, visit https://go.microsoft.com/fwlink/?linkid=2099682
 builder.Services.Configure<DatabaseConfig>(builder.Configuration.GetSection(nameof(DatabaseConfig)));
 builder.Services.AddSingleton<IDatabaseConfig>(sp => sp.GetRequiredService<IOptions<DatabaseConfig>>().Value);
+
+builder.Services.AddSingleton<IAuditRepository, AuditRepository>();
 
 // Add services to the container.
 builder.Services.AddGrpc();

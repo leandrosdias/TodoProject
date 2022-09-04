@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Todo.API", "Todo.API\Todo.A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Audit.API", "Audit.API\Audit.API.csproj", "{3004F0D3-995D-4468-B03C-32B61E456C13}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoProject.Models", "TodoProject.Models\TodoProject.Models.csproj", "{A7315379-ADA8-4ADF-90B7-238EEB32C924}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{3004F0D3-995D-4468-B03C-32B61E456C13}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3004F0D3-995D-4468-B03C-32B61E456C13}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3004F0D3-995D-4468-B03C-32B61E456C13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7315379-ADA8-4ADF-90B7-238EEB32C924}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7315379-ADA8-4ADF-90B7-238EEB32C924}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7315379-ADA8-4ADF-90B7-238EEB32C924}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7315379-ADA8-4ADF-90B7-238EEB32C924}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

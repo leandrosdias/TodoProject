@@ -1,6 +1,6 @@
 ﻿using Audit.API.Data.Configuration;
-using Audit.API.Models;
 using MongoDB.Driver;
+using TodoProject.Models;
 
 namespace Audit.API.Data.Repositories
 {

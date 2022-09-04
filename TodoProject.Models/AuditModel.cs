@@ -1,4 +1,4 @@
-﻿namespace Audit.API.Models
+﻿namespace TodoProject.Models
 {
     public class AuditModel
     {
