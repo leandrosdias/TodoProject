@@ -2,7 +2,7 @@
 {
     public class AuditModel
     {
-        public Guid User { get; set; }
+        public string User { get; set; }
         public DateTime Timestamp { get; set; }
         public string Operation { get; set; }
         public string Entity { get; set; }

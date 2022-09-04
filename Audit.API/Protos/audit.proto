@@ -1,0 +1,22 @@
+syntax = "proto3";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+option csharp_namespace = "Audit.API.Protos";
+
+service AuditProtoService{
+	rpc InsertAudit(InsertAuditRequest) returns (google.protobuf.Empty);
+}
+
+message InsertAuditRequest{
+	message DataModificationRequest{
+		string key = 1;
+		string oldValue = 2;
+        string newValue = 3;
+	}
+
+	string user = 1;
+    google.protobuf.Timestamp timestamp = 2;
+    string operation = 3;
+    string entity = 4;
+	DataModificationRequest dataModifications = 5;
+}
