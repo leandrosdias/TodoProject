@@ -4,6 +4,9 @@ using Todo.API.Data;
 using Todo.API.Domain.Commands.Requests;
 using Todo.API.Domain.Commands.Responses;
 using AutoMapper;
+using Todo.API.Services;
+using Todo.API.Models;
+using TodoProject.Models;
 
 namespace Todo.API.Domain.Handlers
 {
@@ -11,18 +14,33 @@ namespace Todo.API.Domain.Handlers
     {
         private ITodoRepository _todoRepository;
         private readonly IUnitOfWork _uow;
+        private readonly IAuditService _auditService;
 
-        public TodoDeleteHandler(ITodoRepository todoRepository, IUnitOfWork uow)
+        public TodoDeleteHandler(ITodoRepository todoRepository, IUnitOfWork uow, IAuditService auditService)
         {
             _todoRepository = todoRepository;
             _uow = uow;
+            _auditService = auditService;
         }
 
         public Task<TodoDeleteResponse> Handle(TodoDeleteModel request, CancellationToken cancellationToken)
         {
             _todoRepository.Delete(request.Id);
+            SendAudit(request.Id);
             _uow.Commit();
             return Task.FromResult(new TodoDeleteResponse());
+        }
+
+        private void SendAudit(int id)
+        {
+            var audit = new AuditModel
+            {
+                User = Guid.NewGuid().ToString(),
+                Entity = id,
+                Operation = "Delete",
+            };
+
+            _auditService.Insert(audit);
         }
     }
 }

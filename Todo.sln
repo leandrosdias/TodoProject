@@ -5,9 +5,9 @@ VisualStudioVersion = 17.4.32804.182
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Todo.API", "Todo.API\Todo.API.csproj", "{0331CBB9-BC25-4557-97A2-B708FA8CB508}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Audit.API", "Audit.API\Audit.API.csproj", "{3004F0D3-995D-4468-B03C-32B61E456C13}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Audit.API", "Audit.API\Audit.API.csproj", "{3004F0D3-995D-4468-B03C-32B61E456C13}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoProject.Models", "TodoProject.Models\TodoProject.Models.csproj", "{A7315379-ADA8-4ADF-90B7-238EEB32C924}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TodoProject.Models", "TodoProject.Models\TodoProject.Models.csproj", "{A7315379-ADA8-4ADF-90B7-238EEB32C924}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -2,11 +2,11 @@
 using TodoProject.Models;
 using static Audit.API.Protos.InsertAuditRequest.Types;
 
-namespace Audit.API.Profiles
+namespace Todo.API.Profiles
 {
-    public class DataModificationProfile : Profile
+    public class DataModificationsProfile : Profile
     {
-        public DataModificationProfile()
+        public DataModificationsProfile()
         {
             CreateMap<DataModification, DataModificationRequest>().ReverseMap();
         }

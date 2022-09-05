@@ -5,6 +5,8 @@ using Todo.API.Data.Repositories;
 using Todo.API.Domain.Commands.Requests;
 using Todo.API.Domain.Commands.Responses;
 using Todo.API.Models;
+using Todo.API.Services;
+using TodoProject.Models;
 
 namespace Todo.API.Domain.Handlers
 {
@@ -13,19 +15,35 @@ namespace Todo.API.Domain.Handlers
         private ITodoRepository _todoRepository;
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _uow;
-        public TodoCreateHandler(ITodoRepository todoRepository, IMapper mapper, IUnitOfWork uow)
+        private readonly IAuditService _auditService;
+
+        public TodoCreateHandler(ITodoRepository todoRepository, IMapper mapper, IUnitOfWork uow, IAuditService auditService)
         {
             _todoRepository = todoRepository;
             _mapper = mapper;
             _uow = uow;
+            _auditService = auditService;
         }
 
         public Task<TodoCreateResponse> Handle(TodoCreateModel request, CancellationToken cancellationToken)
         {
             var todo = _mapper.Map<TodoModel>(request);
             _todoRepository.Save(todo);
+            SendAudit(todo);
             _uow.Commit();
             return Task.FromResult(new TodoCreateResponse { Todo = todo });
+        }
+
+        private void SendAudit(TodoModel todo)
+        {
+            var audit = new AuditModel
+            {
+                User = Guid.NewGuid().ToString(),
+                Entity = todo.Id,
+                Operation = "Create",
+            };
+
+            _auditService.Insert(audit);
         }
     }
 }

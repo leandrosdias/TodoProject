@@ -20,6 +20,7 @@ namespace Audit.API.Services
 
         public override Task<InsertResponse> InsertAudit(InsertAuditRequest request, ServerCallContext context)
         {
+            request.Timestamp = DateTime.UtcNow.ToTimestamp();
             var audit = _mapper.Map<AuditModel>(request);
             _auditRepository.Insert(audit);
 

@@ -21,6 +21,7 @@ namespace Todo.API.Data.Repositories
             }
 
             _context.TodoList.Remove(todo);
+
         }
 
         public TodoModel FindById(int? id) => _context.TodoList.FirstOrDefault(x => x.Id == id);

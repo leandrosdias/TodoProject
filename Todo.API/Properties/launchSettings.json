@@ -22,6 +22,7 @@
       "commandName": "Docker",
       "launchBrowser": true,
       "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/swagger",
+      "DockerfileRunArguments": "--network todoproject_network",
       "publishAllPorts": true,
       "useSSL": true
     }

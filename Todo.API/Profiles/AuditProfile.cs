@@ -2,7 +2,7 @@
 using AutoMapper;
 using TodoProject.Models;
 
-namespace Audit.API.Profiles
+namespace Todo.API.Profiles
 {
     public class AuditProfile : Profile
     {

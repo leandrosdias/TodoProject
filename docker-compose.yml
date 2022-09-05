@@ -12,7 +12,7 @@ services:
     volumes:
       - /home/leandro/Desenvolvimento/TodoProject/Mongo:/var/lib/mongo/data
     networks:
-      - todoProject-network
+      - network
       
   mongo-express:
     image: mongo-express
@@ -28,7 +28,7 @@ services:
     depends_on:
       - mongo
     networks:
-      - todoProject-network
+      - network
       
   postgres-compose:
     image: postgres
@@ -40,7 +40,7 @@ services:
     volumes:
       - /home/leandro/Desenvolvimento/TodoProject/PostgreSQL:/var/lib/postgresql/data
     networks:
-      - todoProject-network
+      - network
       
   pgadmin-compose:
     image: dpage/pgadmin4
@@ -53,8 +53,9 @@ services:
     depends_on:
       - postgres-compose
     networks:
-      - todoProject-network
+      - network
+
 
 networks: 
-  todoProject-network:
+  network:
     driver: bridge
