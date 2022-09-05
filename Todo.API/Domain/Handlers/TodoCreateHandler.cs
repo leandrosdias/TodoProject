@@ -4,6 +4,7 @@ using Todo.API.Data;
 using Todo.API.Data.Repositories;
 using Todo.API.Domain.Commands.Requests;
 using Todo.API.Domain.Commands.Responses;
+using Todo.API.Mappers;
 using Todo.API.Models;
 using Todo.API.Services;
 using TodoProject.Models;
@@ -29,21 +30,10 @@ namespace Todo.API.Domain.Handlers
         {
             var todo = _mapper.Map<TodoModel>(request);
             _todoRepository.Save(todo);
-            SendAudit(todo);
             _uow.Commit();
+            _auditService.Insert(AuditMapper.GetAuditModel(todo, "Create"));
             return Task.FromResult(new TodoCreateResponse { Todo = todo });
         }
 
-        private void SendAudit(TodoModel todo)
-        {
-            var audit = new AuditModel
-            {
-                User = Guid.NewGuid().ToString(),
-                Entity = todo.Id,
-                Operation = "Create",
-            };
-
-            _auditService.Insert(audit);
-        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Audit.API.Protos;
 using AutoMapper;
+using Microsoft.Extensions.Logging;
 using TodoProject.Models;
 
 namespace Todo.API.Services
@@ -8,26 +9,32 @@ namespace Todo.API.Services
     {
         private readonly AuditProtoService.AuditProtoServiceClient _auditClient;
         private readonly IMapper _mapper;
+        private ILogger<AuditService> _logger;
 
-        public AuditService(AuditProtoService.AuditProtoServiceClient auditClient, IMapper mapper
-            )
+        public AuditService(AuditProtoService.AuditProtoServiceClient auditClient, IMapper mapper, ILogger<AuditService> logger)
         {
             _auditClient = auditClient;
             _mapper = mapper;
+            _logger = logger;
         }
 
-        public async Task<bool> Insert(AuditModel audit)
+        public async Task Insert(AuditModel audit)
         {
             try
             {
-
                 var insertRequest = _mapper.Map<InsertAuditRequest>(audit);
-                return (await _auditClient.InsertAuditAsync(insertRequest)).Result;
+
+                var success = (await _auditClient.InsertAuditAsync(insertRequest)).Result;
+                if (!success)
+                {
+                    _logger.LogInformation("Erro ao chamar AuditRequest");
+                }
             }
             catch (Exception e)
             {
-
-                return false;
+                _logger.LogInformation("Exception ao chamar AuditRequest");
+                _logger.LogInformation("Message: " + e.Message);
+                _logger.LogInformation("Trace: " + e.StackTrace);
             }
         }
     }

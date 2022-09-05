@@ -4,6 +4,6 @@ namespace Todo.API.Services
 {
     public interface IAuditService
     {
-        Task<bool> Insert(AuditModel audit);
+        Task Insert(AuditModel audit);
     }
 }
