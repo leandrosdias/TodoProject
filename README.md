@@ -3,12 +3,12 @@
 Projeto teste de API backend, implementação de API REST com integração de uma API gRPC.
 
 ## Iniciando
-.Para iniciar as APIs e o banco como serviços execute o comando:
+Para iniciar as APIs e o banco como serviços execute o comando:
 ```
 docker-compose up -d
 ```
 
-.Caso queira executar as APIs separadas do compose execute o comando:
+Caso queira executar as APIs separadas do compose execute o comando:
 ```
 docker-compose -f docker-compose_db.yml up -d
 ```
