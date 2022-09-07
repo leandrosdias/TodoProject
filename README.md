@@ -33,9 +33,15 @@ Acesse: http://localhost:8081
 
 ## Dependências
 .NET 6
+
 .AutoMapper 11.0.1
+
 .AutoMapper.Extensions.Microsoft.DependencyInjection 11.0.0
+
 .MediatR 10.0.1
+
 .MediatR.Extensions.Microsoft.DependencyInjection 10.0.1
+
 .Npgsql.EntityFrameworkCore.PostgreSQL 6.0.6
+
 .MongoDB.Driver 2.17.1
