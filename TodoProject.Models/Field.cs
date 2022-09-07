@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace TodoProject.Models
 {
-    public class DataModification
+    public class Field
     {
-        public string Key { get; set; }
+        public string Name { get; set; }
         public string OldValue { get; set; }
         public string NewValue { get; set; }
     }

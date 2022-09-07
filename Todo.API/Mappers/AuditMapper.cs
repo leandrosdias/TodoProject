@@ -8,13 +8,13 @@ namespace Todo.API.Mappers
         public static AuditModel GetAuditModel(TodoModel todo, string operation, TodoModel oldTodo)
         {
             var audit = GetAuditModel(todo.Id, operation);
-            audit.DataModifications = GetDiffProps(todo, oldTodo);
+            audit.Fields = GetDiffProps(todo, oldTodo);
             return audit;
         }
 
-        private static List<DataModification> GetDiffProps(TodoModel todo, TodoModel oldTodo)
+        private static List<Field> GetDiffProps(TodoModel todo, TodoModel oldTodo)
         {
-            var result = new List<DataModification>();
+            var result = new List<Field>();
             foreach (var prop in oldTodo.GetType().GetProperties())
             {
                 if (prop.GetCustomAttributes(typeof(NotAudit), true).Length > 0)
@@ -24,9 +24,9 @@ namespace Todo.API.Mappers
 
                 if (!prop.GetValue(oldTodo).Equals(prop.GetValue(todo)))
                 {
-                    result.Add(new DataModification
+                    result.Add(new Field
                     {
-                        Key = prop.Name,
+                        Name = prop.Name,
                         OldValue = prop.GetValue(oldTodo).ToString(),
                         NewValue = prop.GetValue(todo).ToString()
                     });
