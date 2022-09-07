@@ -21,7 +21,8 @@ Acesse: http://localhost:16543 e realize login com as credenciais informadas no 
 ![Alt text](img/pg_admin_1.png?raw=true "Passo 1")
 
 Clique em "Adicionar Novo Servidor", configure o servidor conforme informações no compose:
-	Senha: LeandroPostgres2021*
+Senha: LeandroPostgres2021*
+	
 ![Alt text](img/pg_admin_2.png?raw=true "Passo 2")
 
 ### Configurando Mongo-Express
