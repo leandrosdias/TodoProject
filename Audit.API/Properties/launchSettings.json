@@ -1,0 +1,19 @@
+{
+  "profiles": {
+    "Audit.API": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "dotnetRunMessages": true,
+      "applicationUrl": "http://localhost:5000"
+    },
+    "Docker": {
+      "commandName": "Docker",
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
+      "DockerfileRunArguments": "--network todoproject_network",
+      "publishAllPorts": true,
+      "useSSL": true
+    }
+  }
+}

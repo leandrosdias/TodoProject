@@ -1,0 +1,98 @@
+version: "3.8"
+
+services:
+  mongo:
+    image: mongo
+    container_name: mongodb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: admin
+    ports:
+      - "27017:27017"
+    volumes:
+      - /home/barry/mongodb/database:/data/db
+    networks:
+      - network
+      
+  mongo-express:
+    image: mongo-express
+    container_name: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: admin
+      ME_CONFIG_MONGODB_PORT: 27017
+      ME_CONFIG_MONGODB_SERVER: mongodb
+    depends_on:
+      - mongo
+    networks:
+      - network
+      
+  postgres-compose:
+    image: postgres
+    container_name: postgres
+    environment:
+      POSTGRES_PASSWORD: "LeandroPostgres2021*"
+    ports:
+      - "15432:5432"
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+    networks:
+      - network
+      
+  pgadmin-compose:
+    image: dpage/pgadmin4
+    container_name: pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "leandro.sdias@hotmail.com"
+      PGADMIN_DEFAULT_PASSWORD: "PgAdmin2022!"
+    ports:
+      - "16543:80"
+    depends_on:
+      - postgres-compose
+    networks:
+      - network
+      
+  todo.api:
+    image: ${DOCKER_REGISTRY-}todoapi
+    container_name: todoApi
+    build:
+      context: .
+      dockerfile: Todo.API/Dockerfile
+    ports:
+      - "7000:80"
+    environment:
+     - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DbConnection=Host=host.docker.internal;Port=15432;Pooling=true;Database=TodoDatabase;User Id=postgres;Password=LeandroPostgres2021*;
+      - GrpcSettings__AuditUrl=http://host.docker.internal:5000
+    depends_on:
+      - postgres-compose
+    networks:
+      - network
+
+  audit.api:
+    image: ${DOCKER_REGISTRY-}auditapi
+    container_name: auditApi
+    build:
+      context: .
+      dockerfile: Audit.API/Dockerfile
+    ports:
+      - "5000:80"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - DatabaseConfig__DatabaseName=auditDatabase
+      - DatabaseConfig__ConnectionString=mongodb://root:admin@host.docker.internal:27017
+    depends_on:
+      - mongo
+    networks:
+      - network
+
+networks: 
+  network:
+    driver: bridge
+    
+volumes:
+    dbdata:
+    auditdata:
